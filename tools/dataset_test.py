@@ -16,8 +16,6 @@ if work_dir not in sys.path:
         sys.path.append(work_dir)
 import net
 
-
-
 def dataset_test():
 
     cfg = Config.fromfile("config/config.py")
@@ -29,7 +27,7 @@ def dataset_test():
     rd.render(nuc_scenes)
 
 if __name__ == '__main__':
-    os.environ['DISPLAY']="192.168.93.1:0"
+    # os.environ['DISPLAY']="192.168.93.1:0"
     print('\n\033[31m-----------------------START-----------------------\033[0m\n')
     dataset_test()
     print('\n\033[31m-----------------------END-----------------------\033[0m\n\n\n')

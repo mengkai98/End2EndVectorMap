@@ -122,8 +122,8 @@ class VectorizeLocalMap(object):
         exteriors = []
         interiors = []
 
-        for geom in polygon_geoms:
-            for poly in geom:
+        for polygon in polygon_geoms:
+            for poly in polygon.geoms:
                 exteriors.append(poly.exterior)
                 for inter in poly.interiors:
                     interiors.append(inter)
@@ -177,7 +177,7 @@ class VectorizeLocalMap(object):
                 v = np.asarray(line.coords)
 
             valid_len = v.shape[0]
-            print(1)
+
         elif self.padding:  # dynamic points
 
             if self.max_len < np.asarray(line.coords).shape[0]:
@@ -216,7 +216,7 @@ class VectorizeLocalMap(object):
             if not line.is_empty:
                 if line.geom_type == 'MultiLineString':
                     # l.geom_type == LineString
-                    for l in line:
+                    for l in line.geoms:
                         if sample_pts:
                             v, nl = self._sample_pts_from_line(
                                 l, label, vector_len)
@@ -401,10 +401,10 @@ class VectorizeLocalMap(object):
                 continue
             # 合并成真值
             for vec, l in zip(v['vectors'], v['length']):
-
                 vectors.append((vec, l, label))
-
+        
         data_dict['vectors'] = vectors
+
         return data_dict
 
     def __call__(self, data_dict: dict):

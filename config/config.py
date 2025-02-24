@@ -1,5 +1,18 @@
 roi_size = (60, 30)
 num_points = 30
+class2label = {
+    'ped_crossing': 0,
+    'divider': 1,
+    'contours': 2,
+    'others': -1,
+    # 'centerline': 3,
+}
+
+img_norm_cfg = dict(
+    mean=[103.530, 116.280, 123.675], std=[1.0, 1.0, 1.0], to_rgb=False)
+
+canvas_size = (200, 100)
+num_class = max(list(class2label.values()))+1
 train_pipeline = [
     dict(type='LoadMultiViewImagesFromFiles'), # 加载图片
     dict(type='ResizeMultiViewImages',          # resize
@@ -19,14 +32,17 @@ train_pipeline = [
         },
         max_len=30,
         normalize=True,
-        class2label = {
-            'ped_crossing': 0,
-            'divider': 1,
-            'contours': 2,
-            'others': -1,
-            # 'centerline': 3,
-        }
+        class2label = class2label 
     ),
+    dict(
+        type='PolygonizeLocalMapBbox',
+        canvas_size=canvas_size,  # xy
+        coord_dim=2,
+        mode='xyxy',
+        threshold=4/200,
+    ),
+    dict(type='Normalize3D', **img_norm_cfg),
+    dict(type='PadMultiViewImages', size_divisor=32, change_intrinsics=True),
 ]
 # train_pipeline =None
 input_modality = dict(

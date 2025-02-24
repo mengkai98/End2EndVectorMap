@@ -2,10 +2,14 @@ import net.dataset.nusc_dataset
 import net.dataset.pipelines.load_multiview_images_from_files
 import net.dataset.pipelines.resize_multiview_images
 import net.dataset.pipelines.vectorize_localmap
-
+import net.dataset.pipelines.polygonize_local_map_bbox
+import net.dataset.pipelines.normalize3d
+import net.dataset.pipelines.pad_multiview_images
 
 NuscenesDataset = net.dataset.nusc_dataset.NuscenesDataset
 LoadMultiViewImagesFromFiles = net.dataset.pipelines.load_multiview_images_from_files.LoadMultiViewImagesFromFiles
 ResizeMultiViewImages = net.dataset.pipelines.resize_multiview_images.ResizeMultiViewImages
 VectorizeLocalMap = net.dataset.pipelines.vectorize_localmap.VectorizeLocalMap
-
+PolygonizeLocalMapBbox =net.dataset.pipelines.polygonize_local_map_bbox.PolygonizeLocalMapBbox
+Normalize3D = net.dataset.pipelines.normalize3d.Normalize3D
+PadMultiViewImages  = net.dataset.pipelines.pad_multiview_images.PadMultiViewImages

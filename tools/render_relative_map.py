@@ -42,6 +42,7 @@ class RenderDataset:
         
         cnt = 0
         artist_obj_list= []
+
         geoms_dict = frame[self.key]
         for item in geoms_dict:
 
